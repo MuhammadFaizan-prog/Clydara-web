@@ -5,8 +5,8 @@ import { RollerCoaster } from "lucide-react";
 
 const About = () => {
   const teamMembers = [
-    { name: "Shahmeer H.", role: "CEO & Co-founder" },
-    { name: "Musaffa S.", role: "COO & Co-founder" },
+    { name: "Faizan", role: "CEO & Co-founder" },
+    { name: "Rohan", role: "COO & Co-founder" },
     { name: "Mehroze K.", role: "CGO" },
   ];
   const getInitials = (name) => {
