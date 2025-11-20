@@ -7,13 +7,19 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { sendContactEmail, type ContactFormPayload } from "@/lib/email";
 
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const { toast } = useToast();
+<<<<<<< Updated upstream
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
+=======
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<ContactFormPayload>({
+>>>>>>> Stashed changes
     name: "",
     email: "",
     phone: "",
@@ -28,8 +34,9 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+<<<<<<< Updated upstream
     setIsLoading(true);
 
     const templateParams = {
@@ -79,6 +86,36 @@ const Contact = () => {
       .finally(() => {
         setIsLoading(false);
       });
+=======
+    setIsSubmitting(true);
+
+    try {
+      await sendContactEmail(formData);
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you as soon as possible.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "",
+        message: "",
+        service: "AI & Automation"
+      });
+    } catch (error) {
+      console.error("Failed to send contact message", error);
+      toast({
+        title: "Unable to send message",
+        description: "Please try again in a moment or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+>>>>>>> Stashed changes
   };
 
   const contactInfo = [
@@ -280,10 +317,17 @@ const Contact = () => {
                     
                     <Button 
                       type="submit" 
+<<<<<<< Updated upstream
                       disabled={isLoading}
                       className="bg-brand-blue text-white w-full border-2 border-black shadow-neo hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-none font-black text-lg py-6 transition-all uppercase disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       <Send className="w-5 h-5 mr-2" /> {isLoading ? "Sending..." : "Send Message"}
+=======
+                      className="bg-brand-blue text-white w-full border-2 border-black shadow-neo hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-none font-black text-lg py-6 transition-all uppercase"
+                      disabled={isSubmitting}
+                    >
+                      <Send className="w-5 h-5 mr-2" /> {isSubmitting ? "Sending..." : "Send Message"}
+>>>>>>> Stashed changes
                     </Button>
                   </form>
                 </div>
