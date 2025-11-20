@@ -7,7 +7,7 @@ const About = () => {
   const teamMembers = [
     { name: "Faizan", role: "CEO & Co-founder" },
     { name: "Rohan", role: "COO & Co-founder" },
-    { name: "Mehroze K.", role: "CGO" },
+    { name: "Subhan", role: "CGO" },
   ];
   const getInitials = (name) => {
     return name
