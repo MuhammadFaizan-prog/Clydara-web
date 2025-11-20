@@ -8,8 +8,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
+import emailjs from "@emailjs/browser";
+
 const Contact = () => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,24 +30,55 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    
-    // This would be replaced with actual form submission logic
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      subject: "",
-      message: "",
-      service: "AI & Automation"
-    });
+    setIsLoading(true);
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      subject: formData.subject,
+      service: formData.service,
+      message: formData.message,
+    };
+
+    emailjs
+      .send(
+        "service_6ntqen4",
+        "template_cvxf8le",
+        templateParams,
+        "6r6N8V6VRCJrRGRex"
+      )
+      .then(
+        () => {
+          toast({
+            title: "Message sent successfully!",
+            description: "We'll get back to you as soon as possible.",
+          });
+          
+          // Reset form
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            company: "",
+            subject: "",
+            message: "",
+            service: "AI & Automation"
+          });
+        },
+        (error) => {
+          console.error("FAILED...", error);
+          toast({
+            title: "Error sending message",
+            description: "Please try again later or contact us directly.",
+            variant: "destructive",
+          });
+        }
+      )
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const contactInfo = [
@@ -246,9 +280,10 @@ const Contact = () => {
                     
                     <Button 
                       type="submit" 
-                      className="bg-brand-blue text-white w-full border-2 border-black shadow-neo hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-none font-black text-lg py-6 transition-all uppercase"
+                      disabled={isLoading}
+                      className="bg-brand-blue text-white w-full border-2 border-black shadow-neo hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-none font-black text-lg py-6 transition-all uppercase disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      <Send className="w-5 h-5 mr-2" /> Send Message
+                      <Send className="w-5 h-5 mr-2" /> {isLoading ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </div>
