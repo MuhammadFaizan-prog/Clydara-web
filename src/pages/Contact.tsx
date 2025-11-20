@@ -44,10 +44,10 @@ const Contact = () => {
 
     emailjs
       .send(
-        "service_6ntqen4",
-        "template_cvxf8le",
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         templateParams,
-        "6r6N8V6VRCJrRGRex"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
         () => {
