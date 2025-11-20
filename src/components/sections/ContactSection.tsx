@@ -6,17 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { sendContactEmail, type ContactFormPayload } from "@/lib/email";
 
-import emailjs from "@emailjs/browser";
+
 
 const ContactSection = () => {
   const { toast } = useToast();
-<<<<<<< Updated upstream
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-=======
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<ContactFormPayload>({
->>>>>>> Stashed changes
     name: "",
     email: "",
     phone: "",
@@ -33,57 +28,6 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-<<<<<<< Updated upstream
-    setIsLoading(true);
-
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      subject: formData.subject,
-      service: formData.service,
-      message: formData.message,
-    };
-
-    emailjs
-      .send(
-        "service_6ntqen4",
-        "template_cvxf8le",
-        templateParams,
-        "6r6N8V6VRCJrRGRex"
-      )
-      .then(
-        () => {
-          toast({
-            title: "Message sent successfully!",
-            description: "We'll get back to you as soon as possible.",
-          });
-          
-          // Reset form
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            company: "",
-            subject: "",
-            message: "",
-            service: "AI & Automation"
-          });
-        },
-        (error) => {
-          console.error("FAILED...", error);
-          toast({
-            title: "Error sending message",
-            description: "Please try again later or contact us directly.",
-            variant: "destructive",
-          });
-        }
-      )
-      .finally(() => {
-        setIsLoading(false);
-      });
-=======
     setIsSubmitting(true);
 
     try {
@@ -113,7 +57,6 @@ const ContactSection = () => {
     } finally {
       setIsSubmitting(false);
     }
->>>>>>> Stashed changes
   };
 
   return (
@@ -314,21 +257,12 @@ const ContactSection = () => {
                     />
                   </div>
                   
-<<<<<<< Updated upstream
-                  <Button 
-                    type="submit" 
-                    disabled={isLoading}
-                    className="w-full md:w-auto bg-brand-blue text-white border-2 border-black shadow-neo hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-none font-bold text-lg py-6 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? "Sending..." : "Send Message"}
-=======
                   <Button
                     type="submit"
                     className="w-full md:w-auto bg-brand-blue text-white border-2 border-black shadow-neo hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-none font-bold text-lg py-6 transition-all"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
->>>>>>> Stashed changes
                   </Button>
                 </form>
               </div>
