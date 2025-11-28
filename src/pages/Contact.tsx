@@ -38,8 +38,10 @@ const Contact = () => {
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you as soon as possible.",
+        duration: 5000,
       });
 
+      // Reset form after successful submission
       setFormData({
         name: "",
         email: "",
@@ -51,10 +53,17 @@ const Contact = () => {
       });
     } catch (error) {
       console.error("Failed to send contact message", error);
+      
+      // Extract error message for better user feedback
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Please try again in a moment or contact us directly.";
+      
       toast({
         title: "Unable to send message",
-        description: "Please try again in a moment or contact us directly.",
+        description: errorMessage,
         variant: "destructive",
+        duration: 6000,
       });
     } finally {
       setIsSubmitting(false);

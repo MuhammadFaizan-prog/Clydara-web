@@ -38,6 +38,7 @@ const ContactSection = () => {
         duration: 5000,
       });
 
+      // Reset form after successful submission
       setFormData({
         name: "",
         email: "",
@@ -49,10 +50,17 @@ const ContactSection = () => {
       });
     } catch (error) {
       console.error("Failed to send contact message", error);
+      
+      // Extract error message for better user feedback
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Please try again shortly or reach out directly.";
+      
       toast({
         title: "Unable to send message",
-        description: "Please try again shortly or reach out directly.",
+        description: errorMessage,
         variant: "destructive",
+        duration: 6000,
       });
     } finally {
       setIsSubmitting(false);

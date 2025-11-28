@@ -17,10 +17,11 @@ const HeroSection = () => {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6 uppercase tracking-tight">
-                Empowering Innovation Through{" "}
+                Where{" "}
                 <span className="bg-brand-blue text-white px-2 inline-block transform -skew-x-6 border-2 border-black shadow-neo">
-                  AI & Top Talent
-                </span>
+                  Innovation
+                </span>{" "}
+                Meets Simplicity
               </h1>
               
               <p className="text-xl md:text-2xl text-black font-bold mb-8 max-w-lg border-l-4 border-brand-blue pl-4">
