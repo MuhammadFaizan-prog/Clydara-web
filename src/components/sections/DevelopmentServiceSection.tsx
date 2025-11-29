@@ -15,7 +15,7 @@ const DevelopmentServiceSection = () => {
       title: "Mobile App Development",
       description: "Build native and cross-platform mobile applications for iOS and Android with seamless user experiences.",
       icon: <Smartphone />,
-      link: "/services/development/mobile"
+      link: "/services/mobile"
     },
     {
       title: "Custom Software Development",
@@ -39,7 +39,7 @@ const DevelopmentServiceSection = () => {
       title: "Cloud Solutions",
       description: "Harness the power of cloud technology for scalable, secure, and cost-effective infrastructure solutions.",
       icon: <Cloud />,
-      link: "/services/development/cloud"
+      link: "/services/cloud"
     },
     {
       title: "DevOps Services",
